@@ -1,0 +1,32 @@
+# Секреты и локальные настройки
+.env
+*.env
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Артефакты прогонов
+logs/
+*.log
+allure-results/
+allure-report/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# IDE / ОС
+.idea/
+.vscode/
+.DS_Store
+
+# Playwright
+test-results/
+playwright-report/
+results/
+.auth/
