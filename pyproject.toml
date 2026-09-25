@@ -1,0 +1,35 @@
+[project]
+name = "ai-assisted-ui-auto-tests"
+version = "0.1.0"
+description = "UI-автотесты на Playwright (демонстрационная версия)"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["integration_tests/tests"]
+addopts = [
+    "-v",
+    "--strict-markers",
+    "-ra",
+    "--import-mode=importlib",
+    "--alluredir=allure-results",
+    "--screenshot=only-on-failure",
+    "--tracing=retain-on-failure",
+    "--output=test-results",
+]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+# Читаемые кириллические id параметров вместо \uXXXX-экранирования
+disable_test_id_escaping_and_forfeit_all_rights_to_community_support = true
+log_file = "test-results/test_run.log"
+log_file_level = "DEBUG"
+log_file_format = "%(asctime)s | %(levelname)-7s | %(name)s | %(funcName)s:%(lineno)d | %(message)s"
+markers = [
+    "ui: UI-тесты (требуют браузер и доступ к стенду)",
+    "smoke: быстрый прогон критического функционала",
+    "layout: структура раздела (колонки, иконки)",
+    "pagination: пагинация",
+    "sorting: сортировка",
+    "filtering: фильтры",
+]

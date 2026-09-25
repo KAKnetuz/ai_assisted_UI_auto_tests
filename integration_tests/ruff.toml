@@ -1,0 +1,39 @@
+# Конфигурация Ruff для проекта integration_tests
+# Python версия: 3.13
+
+target-version = "py313"
+line-length = 120
+
+[lint]
+# Включаем важные правила
+select = [
+    "E", "F", "W",   # PEP8, Pyflakes, warnings
+    "I",             # isort (сортировка импортов)
+    "UP",            # pyupgrade
+    "B",             # flake8-bugbear
+    "SIM",           # flake8-simplify
+    "RUF",           # Ruff-specific rules
+    "T20",           # print statements
+]
+
+# Игнорируем правила, которые создают шум в русскоязычном коде или не критичны для автотестов
+ignore = [
+    "G004",    # Разрешаем f-строки в логировании (читаемость важнее микро-оптимизации)
+    "PLR0911", # Разрешаем больше 6 return в сложных функциях
+    "LOG004",  # Разрешаем .exception() вне except (это прокси-метод)
+    "LOG014",  # Разрешаем exc_info=True вне except
+    "DTZ005",  # Разрешаем datetime.now() без timezone (для простоты)
+
+    # === ИГНОРЫ ДЛЯ РУССКОЯЗЫЧНЫХ КОММЕНТАРИЕВ И СТРОК ===
+    "RUF001",  # Ambiguous characters in strings (кириллица/латиница)
+    "RUF002",  # Ambiguous characters in docstrings
+    "RUF003",  # Ambiguous characters in comments (ВАЖНО: добавлено сейчас!)
+
+    # Прочие незначительные предупреждения
+    "RUF012",  # Mutable class attributes
+    "SIM105",  # Use contextlib.suppress (не всегда уместно в тестах)
+    "SIM108",  # Use ternary operator (часто снижает читаемость)
+]
+
+[lint.isort]
+known-first-party = ["integration_tests"]
